@@ -13,15 +13,17 @@ class Index:
     def __init__(self):
         self.coord = list()
         self.commands = ""
+        self.RoversTotal = 0
 
     def GetInput(self):
         #Get Input from console
-        rovers_total = int(raw_input("Please Enter Number of Robots to control: "))
+
+        self.GetNumberOfRobots()
         print "\n" #Print empty line
         robots = [] #Empty array
 
         #loop through number of rovers/robots entered
-        for x in range(rovers_total):
+        for x in range(self.RoversTotal):
             index = x + 1 #Robot index
 
             #Validate Inputs
@@ -53,14 +55,14 @@ class Index:
 
     def ValidateCoord(self,index):
         #get input
-        self.coord = list(raw_input("Enter coordinates for Robot #"+ str(index) + " [ e.g: 5 4 E ] ").replace(" ","")) #remove white spaces
+        self.coord = list(raw_input("Enter coordinates for Robot #"+ str(index) + " [ e.g: 5 4 E ]: ").replace(" ","")) #remove white spaces
 
         #First element
         try:
             int(self.coord[0])
             pass
         except ValueError:
-            print "First value must be numeral, please try again"
+            print "First value must be numeric, please try again"
             self.ValidateCoord(index)
 
         #Second element
@@ -68,7 +70,7 @@ class Index:
             int(self.coord[1])
             pass
         except ValueError:
-            print "Second value must be numeral, please try again"
+            print "Second value must be numeric, please try again"
             self.ValidateCoord(index)
 
         #Last element
@@ -92,7 +94,7 @@ class Index:
 
 
     def ValidateCmd(self,index):
-        commands = list(raw_input("Enter commands for Robot #"+str(index) +" [e.g: MMMRML ] ").replace(" ",""))
+        commands = list(raw_input("Enter commands for Robot #"+str(index) +" [e.g: MMMRML ]: ").replace(" ",""))
 
         #serach for charectors
         for letter in commands:
@@ -102,6 +104,12 @@ class Index:
 
         self.commands = commands 
 
+    def GetNumberOfRobots(self):
+        try:
+            self.RoversTotal = int(raw_input("Please Enter Number of Robots to control: "))
+        except ValueError:
+            print "Value must be numeric, try again"
+            self.GetNumberOfRobots()
         
 
 #Initialize 
