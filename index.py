@@ -79,11 +79,14 @@ class Index:
             print "Last value must be a string, please try again"
             self.ValidateCoord(index)
         except ValueError:
-            if self.coord[2].upper() !="S" or self.coord[2].upper() !="N" or self.coord[2].upper() !="W" or self.coord[2].upper() !="E":
+            pole = self.coord[2].upper()
+            print pole
+            #exit
+            if pole =="S" or pole =="N" or pole =="W" or pole =="E":
+                pass
+            else:
                 print "Last value must only be E,W,S or N"
                 self.ValidateCoord(index)
-            else:
-                pass
 
         
             
