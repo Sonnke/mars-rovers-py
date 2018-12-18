@@ -80,7 +80,7 @@ class Index:
             self.ValidateCoord(index)
         except ValueError:
             pole = self.coord[2].upper()
-            print pole
+            
             #exit
             if pole =="S" or pole =="N" or pole =="W" or pole =="E":
                 pass
@@ -97,11 +97,13 @@ class Index:
 
 
     def ValidateCmd(self,index):
-        commands = list(raw_input("Enter commands for Robot #"+str(index) +" [e.g: MMMRML ]: ").replace(" ",""))
+        commands = raw_input("Enter commands for Robot #"+str(index) +" [e.g: MMMRML ]: ").replace(" ","")
 
         #serach for charectors
-        for letter in commands:
-            if letter !="M" or letter !="R" or letter !="L":
+        for letter in list(commands):
+            if letter.upper() =="M" or letter.upper() =="R" or letter.upper() =="L":
+                pass
+            else:
                 print "Command string must only contain letter M,R or L"
                 self.ValidateCmd(index)
 
