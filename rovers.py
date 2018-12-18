@@ -29,6 +29,7 @@ class Rovers:
 
         return NewCoorDinates.get(pole,axis)
 
+
     #Make A turn
     def MakeAturn(self,pole,orientation):
         position = pole+orientation
@@ -47,6 +48,8 @@ class Rovers:
         return angle.get(position,90)
 
 
+
+    
     def GetPoleByAngle(self,angle):
         pole = {
             90: "N", #North pole

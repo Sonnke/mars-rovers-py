@@ -3,44 +3,107 @@
 
 
 import sys
-sys.path.insert(0, '.')
+sys.path.insert(0, '.') #current path
 from rovers import Rovers
 
 rover = Rovers() #Rovers
 
+class Index:
+
+    def __init__(self):
+        self.coord = list()
+        self.commands = ""
+
+    def GetInput(self):
+        #Get Input from console
+        rovers_total = int(raw_input("Please Enter Number of Robots to control: "))
+        print "\n" #Print empty line
+        robots = [] #Empty array
+
+        #loop through number of rovers/robots entered
+        for x in range(rovers_total):
+            index = x + 1 #Robot index
+
+            #Validate Inputs
+            self.ValidateCoord(index)
+            self.ValidateCmd(index)
+            
+            print "\n" #Print empty line
+            #append to array
+
+            list_of_dictionaries = {
+                "Number": index,
+                "Points": [int(self.coord[0]), int(self.coord[1]), str(self.coord[2]).upper()], #Make an array from coord input
+                "Commands": self.commands.upper() #Change commands to upper case
+            }
+
+            robots.append(list_of_dictionaries) #append to an array
+
+
+        for obj in robots:
+
+            print "Moving Robot #",obj["Number"]
+
+            rover.SetValues(obj["Points"],obj["Commands"])
+            rover.MakeAmove()
+            
+            print "............................"
 
 
 
-#Get Input from console
-rovers_total = int(raw_input("Please Enter Number of Robots to control: "))
-print "\n" #Print empty line
-robots = [] #Empty array
+    def ValidateCoord(self,index):
+        #get input
+        self.coord = list(raw_input("Enter coordinates for Robot #"+ str(index) + " [ e.g: 5 4 E ] ").replace(" ","")) #remove white spaces
 
-#loop through number of rovers/robots entered
-for x in range(rovers_total):
-    index = x + 1 #Robot index
+        #First element
+        try:
+            int(self.coord[0])
+            pass
+        except ValueError:
+            print "First value must be numeral, please try again"
+            self.ValidateCoord(index)
 
-    coord = list(raw_input("Enter coordinates for Robot #"+ str(index) + " [ e.g: 5 4 E ] ").replace(" ","")) #remove white spaces
-    #coord = rover.ValidateInputPoints(validateCoord,num)
+        #Second element
+        try:
+            int(self.coord[1])
+            pass
+        except ValueError:
+            print "Second value must be numeral, please try again"
+            self.ValidateCoord(index)
 
-    commands = raw_input("Enter commands for Robot #"+str(index) +" [e.g: MMMRML ] ")
-    print "\n" #Print empty line
-    #append to array
+        #Last element
+        try:
+            int(self.coord[2])
+            print "Last value must be a string, please try again"
+            self.ValidateCoord(index)
+        except ValueError:
+            if self.coord[2].upper() !="S" or self.coord[2].upper() !="N" or self.coord[2].upper() !="W" or self.coord[2].upper() !="E":
+                print "Last value must only be E,W,S or N"
+                self.ValidateCoord(index)
+            else:
+                pass
 
-    list_of_dictionaries = {
-        "Number": index,
-        "Points": [int(coord[0]), int(coord[1]), str(coord[2]).upper()], #Make an array from coord input
-        "Commands": commands.upper() #Change commands to upper case
-    }
-
-    robots.append(list_of_dictionaries) #append to an array
+        
+            
+        if len(self.coord) !=3:
+            print "Coordinates must be 3 charector long"
+            self.ValidateCoord(index)
 
 
-for obj in robots:
 
-    print "Moving Robot #",obj["Number"]
+    def ValidateCmd(self,index):
+        commands = list(raw_input("Enter commands for Robot #"+str(index) +" [e.g: MMMRML ] ").replace(" ",""))
 
-    rover.SetValues(obj["Points"],obj["Commands"])
-    rover.MakeAmove()
-    
-    print "............................"
+        #serach for charectors
+        for letter in commands:
+            if letter !="M" or letter !="R" or letter !="L":
+                print "Command string must only contain letter M,R or L"
+                self.ValidateCmd(index)
+
+        self.commands = commands 
+
+        
+
+#Initialize 
+index = Index()
+index.GetInput()
