@@ -55,7 +55,7 @@ class Index:
 
     def ValidateCoord(self,index):
         #get input
-        self.coord = list(raw_input("Enter coordinates for Robot #"+ str(index) + " [ e.g: 5 4 E ]: ").replace(" ","")) #remove white spaces
+        self.coord = list(raw_input("Enter coordinates for Robot # "+ str(index) + " [ e.g: 5 4 E ]: ").replace(" ","")) #remove white spaces
 
         #First element
         try:
@@ -91,13 +91,13 @@ class Index:
         
             
         if len(self.coord) !=3:
-            print "Coordinates must be 3 charector long"
+            print "Coordinates must be 3 charecter long"
             self.ValidateCoord(index)
 
 
 
     def ValidateCmd(self,index):
-        commands = raw_input("Enter commands for Robot #"+str(index) +" [e.g: MMMRML ]: ").replace(" ","")
+        commands = raw_input("Enter commands for Robot # "+str(index) +" [e.g: MMMRML ]: ").replace(" ","")
 
         #serach for charectors
         for letter in list(commands):
