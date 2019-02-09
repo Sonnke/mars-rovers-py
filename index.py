@@ -1,4 +1,4 @@
-#Author: Nhlonipho Sonke Gumede
+#Author: Nhlonipho Gumede
 #email: ns.gumede2@gmail.com
 
 
@@ -17,7 +17,6 @@ class Index:
 
     def GetInput(self):
         #Get Input from console
-
         self.GetNumberOfRobots()
         print "\n" #Print empty line
         robots = [] #Empty array
