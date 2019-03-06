@@ -56,6 +56,9 @@ class Index:
         #get input
         self.coord = list(raw_input("Enter coordinates for Robot # "+ str(index) + " [ e.g: 5 4 E ]: ").replace(" ","")) #remove white spaces
 
+        if len(self.coord) !=3:
+            print "Coordinates must be 3 charecter long"
+            self.ValidateCoord(index)
         #First element
         try:
             int(self.coord[0])
@@ -89,9 +92,7 @@ class Index:
 
         
             
-        if len(self.coord) !=3:
-            print "Coordinates must be 3 charecter long"
-            self.ValidateCoord(index)
+        
 
 
 
